@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Alpine Plugins -->
+    <script defer src="https://unpkg.com/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Alpine.js Store</title>
+</head>
+
+<body>
+
+    <div x-data :class="$store.darkMode.on && 'bg-gray-800 text-white'"
+        class="container ms-auto max-w-sm mt-6 bg-gray-50 p-4">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem, voluptatibus amet corporis quo
+        veritatis quae libero porro ipsa aperiam officiis debitis ex, magnam aliquam vero voluptatum
+        ut sapiente. Repudiandae, ullam?
+
+        <button @click="$store.darkMode.toggle()" class="block mt-4 text-xs bg-gray-200 px-4 py-2"
+            :class="$store.darkMode.on && 'bg-gray-700'">
+            Toogle Datk Mode
+        </button>
+
+
+    </div>
+
+    <!-- x-mask -->
+    <div class="mt-6" x-data>
+        <div class="text-2xl mb-2">Enter a date:</div>
+        <input x-mask="99/99/9999" class="border w-full p-2" placeholder="MM/DD/YYYY">
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('darkMode', {
+                on: false,
+                toggle() {
+                    this.on = !this.on;
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>
