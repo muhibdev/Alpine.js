@@ -92,9 +92,43 @@
             </div>
 
             <!-- x-html -->
+            <div x-html="(await axios.get('./partial.html')).data">...</div>
+
+            <!-- $el -->
+            <button @click="$el.innerHTML = 'Hello World'" class="mt-4 p-4 border">
+                Replace Text
+            </button>
+
+            <!-- x-init  & $watch-->
+            <div x-init="$watch('posts',value => console.log(value))"></div>
+
+            <!--  $dispatch -->
+            <div @notify="alert('You have been notified')">
+                <button @click="$dispatch('notify')"
+                    class="bg-green-700 text-white p-2 mt-4 rounded-lg">
+                    Notify
+                </button>
+            </div>
+
+            <!-- $data -->
+            <button @click="getLatesPost($data.posts)"
+                class="bg-orange-800 text-white mt-6 p-2 rounded-lg">
+                Get Latest Post
+            </button>
 
         </div>
     </div>
+
+    <footer x-data class="text-center mt-10">
+        <p>Copyrights &copy; <span x-text="new Date().getFullYear()"></span></p>
+    </footer>
+
+    <script>
+        function getLatesPost(posts) {
+            console.log(posts[posts.length - 1]);
+        }
+    </script>
+
 </body>
 
 </html>
